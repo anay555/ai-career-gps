@@ -4,6 +4,7 @@ from typing import Optional
 
 import streamlit as st
 import requests
+from utils.data import get_skills_data
 
 API_URL = os.getenv("API_URL")
 
@@ -19,16 +20,18 @@ def check_api_health(base_url: str) -> Optional[dict]:
 
 st.title("🧠 Skills")
 
-reco_tab, trends_tab = st.tabs(["Recommender (stub)", "Trends (stub)"])
+reco_tab, trends_tab = st.tabs(["Recommender", "Trends"])
 
 with reco_tab:
-    st.info("Placeholder: personalized skill recommendations and roadmaps.")
-    st.text_input("Target role / field")
+    role = st.text_input("Target role / field", value="Software Engineer")
     st.slider("Experience (years)", 0, 20, 0)
-    st.button("Get recommendations")
+    data = get_skills_data(API_URL, role=role)
+    st.dataframe(data, use_container_width=True)
 
 with trends_tab:
-    st.info("Placeholder: show skill demand and salary trends.")
+    st.write("Snapshot of skills data:")
+    data = get_skills_data(API_URL)
+    st.dataframe(data, use_container_width=True)
 
 if API_URL:
     status = check_api_health(API_URL)

@@ -5,7 +5,11 @@ from typing import Optional
 import streamlit as st
 import requests
 
-st.set_page_config(page_title="AI Career GPS", page_icon="🧭", layout="wide")
+ASSETS_DIR = os.path.join(os.path.dirname(__file__), "assets")
+FAVICON_PATH = os.path.join(ASSETS_DIR, "favicon.png")
+PAGE_ICON = FAVICON_PATH if os.path.exists(FAVICON_PATH) else "🧭"
+
+st.set_page_config(page_title="AI Career GPS", page_icon=PAGE_ICON, layout="wide")
 
 TAGLINE = "Data-Driven Career GPS: From Stream to Startup"
 API_URL = os.getenv("API_URL")  # Optional: e.g. https://your-api.example.com
@@ -44,6 +48,11 @@ def check_api_health(base_url: str) -> Optional[dict]:
 
 # --- Sidebar: API status and links ---
 with st.sidebar:
+    # Optional logo
+    logo_path = os.path.join(ASSETS_DIR, "logo.png")
+    if os.path.exists(logo_path):
+        st.image(logo_path, use_column_width=True)
+
     st.header("⚙️ System")
     if API_URL:
         status = check_api_health(API_URL)

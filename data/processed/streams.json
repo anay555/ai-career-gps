@@ -1,0 +1,5 @@
+[
+  { "id": "science", "name": "Science", "summary": "STEM-focused, pathways to engineering, research, medicine." },
+  { "id": "commerce", "name": "Commerce", "summary": "Business, finance, accounting, and management pathways." },
+  { "id": "arts", "name": "Arts", "summary": "Humanities, design, social sciences, and creative careers." }
+]

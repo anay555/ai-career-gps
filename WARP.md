@@ -47,6 +47,10 @@ Streamlit app
 - Multipage structure:
   - Main: streamlit_app.py (hero + tabs)
   - Pages: pages/1_📚_Streams.py, pages/2_🏛️_Colleges.py, pages/3_🧠_Skills.py, pages/4_ℹ️_About.py
+- Assets:
+  - Optional: assets/logo.png (sidebar), assets/favicon.png (page icon). Falls back to emoji if not present.
+- Data sources for pages:
+  - Tries API_URL first (e.g., /api/streams, /api/colleges, /api/skills/recommendations), falls back to local JSON in data/processed/*.json.
 - Streamlit Cloud deploy:
   - App entrypoint: streamlit_app.py (at repo root)
   - Optional secret: API_URL (if calling an external API for /health)

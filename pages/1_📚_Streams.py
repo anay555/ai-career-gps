@@ -4,6 +4,7 @@ from typing import Optional
 
 import streamlit as st
 import requests
+from utils.data import get_streams_data
 
 API_URL = os.getenv("API_URL")
 
@@ -19,7 +20,9 @@ def check_api_health(base_url: str) -> Optional[dict]:
 
 st.title("🧭 Streams")
 
-summary_tab, explorer_tab = st.tabs(["Summary", "Explorer (stub)"])
+data = get_streams_data(API_URL)
+
+summary_tab, explorer_tab = st.tabs(["Summary", "Explorer"])
 
 with summary_tab:
     st.write(
@@ -33,9 +36,12 @@ with summary_tab:
     with col3:
         st.metric("Arts", "Varied", "+")
 
+    st.markdown("### Data snapshot")
+    st.dataframe(data, use_container_width=True)
+
 with explorer_tab:
-    st.info("This section is a placeholder. Connect to data/ or an external API to populate.")
-    st.selectbox("Choose a stream", ["Science", "Commerce", "Arts"], index=0)
+    options = [row.get("name", row.get("id")) for row in data] if data else ["Science", "Commerce", "Arts"]
+    choice = st.selectbox("Choose a stream", options, index=0)
     st.text_input("Filter by aptitude / interests")
     st.button("Generate guidance")
 

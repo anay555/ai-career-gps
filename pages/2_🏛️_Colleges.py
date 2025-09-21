@@ -4,6 +4,7 @@ from typing import Optional
 
 import streamlit as st
 import requests
+from utils.data import get_colleges_data
 
 API_URL = os.getenv("API_URL")
 
@@ -19,16 +20,23 @@ def check_api_health(base_url: str) -> Optional[dict]:
 
 st.title("🏛️ Colleges")
 
-compare_tab, insights_tab = st.tabs(["Compare (stub)", "Insights (stub)"])
+colleges = get_colleges_data(API_URL)
+
+compare_tab, insights_tab = st.tabs(["Compare", "Insights"])
 
 with compare_tab:
-    st.info("Placeholder: compare colleges by package, research, entrepreneurship support.")
-    st.multiselect("Colleges to compare", ["College A", "College B", "College C"], default=["College A"])
-    st.selectbox("Metric", ["Package", "Research", "Entrepreneurship"], index=0)
-    st.button("Compare")
+    st.write("Compare colleges by package, research, and entrepreneurship support.")
+    names = [c.get("name", c.get("id")) for c in colleges] if colleges else []
+    selected = st.multiselect("Colleges to compare", names, default=names[:1])
+    metric = st.selectbox("Metric", ["package_median_lpa", "research_index", "entrepreneurship_support"], index=0)
+
+    if selected and colleges:
+        rows = [c for c in colleges if c.get("name") in selected]
+        st.dataframe(rows, use_container_width=True)
 
 with insights_tab:
-    st.info("Placeholder: show analytics on education vs industry gap and ecosystems.")
+    st.write("Snapshot of available college records:")
+    st.dataframe(colleges, use_container_width=True)
 
 if API_URL:
     status = check_api_health(API_URL)

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "college-a",
+    "name": "College A",
+    "package_median_lpa": 8.5,
+    "research_index": 0.62,
+    "entrepreneurship_support": "incubator"
+  },
+  {
+    "id": "college-b",
+    "name": "College B",
+    "package_median_lpa": 6.1,
+    "research_index": 0.44,
+    "entrepreneurship_support": "mentorship"
+  }
+]
