@@ -44,6 +44,9 @@ Important notes from README
 Streamlit app
 - Local run (Windows PowerShell):
   - python -m venv .venv; .\.venv\Scripts\Activate.ps1; pip install -r requirements.txt; streamlit run streamlit_app.py
+- Multipage structure:
+  - Main: streamlit_app.py (hero + tabs)
+  - Pages: pages/1_📚_Streams.py, pages/2_🏛️_Colleges.py, pages/3_🧠_Skills.py, pages/4_ℹ️_About.py
 - Streamlit Cloud deploy:
   - App entrypoint: streamlit_app.py (at repo root)
   - Optional secret: API_URL (if calling an external API for /health)
