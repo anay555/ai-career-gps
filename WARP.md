@@ -47,6 +47,7 @@ Streamlit app
 - Streamlit Cloud deploy:
   - App entrypoint: streamlit_app.py (at repo root)
   - Optional secret: API_URL (if calling an external API for /health)
+  - Secrets template: .streamlit/secrets.template.toml (copy values into Streamlit Cloud > App > Settings > Secrets)
 
 Workspace layout and conventions
 - Root package.json defines npm workspaces for apps/* and packages/*.
