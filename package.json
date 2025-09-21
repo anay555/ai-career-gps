@@ -1,0 +1,28 @@
+{
+  "name": "ai-career-gps",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=18.17"
+  },
+  "scripts": {
+    "dev:api": "node apps/api/src/index.js",
+    "build": "echo build step placeholder",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch",
+    "start": "echo start web placeholder"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "eslint": "^9.36.0",
+    "globals": "^16.4.0",
+    "jest": "^30.1.3",
+    "supertest": "^7.1.4"
+  }
+}
